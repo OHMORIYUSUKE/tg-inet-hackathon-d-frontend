@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import Top from "./Pages/Top";
 import View from "./Pages/View";
 import NotFound from "./Pages/NotFound";
+import SpaceEntry from "./Pages/SpaceEntry";
 
 function App() {
   const history = useHistory();
@@ -10,6 +11,7 @@ function App() {
     <BrowserRouter history={history}>
       <Switch>
         <Route exact path="/" component={Top} />
+        <Route exact path="/space/entry" component={SpaceEntry} />
         <Route exact path="/space/:name" render={() => <View />} />
         <Route component={NotFound} />
       </Switch>
