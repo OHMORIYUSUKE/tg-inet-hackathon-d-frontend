@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 function Footer() {
   return (
     <>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" style={{ marginTop: "2rem" }}>
         <Container maxWidth="md">
           <Toolbar>
             <Typography variant="body1" color="inherit">

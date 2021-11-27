@@ -19,9 +19,6 @@ export default function ButtonAppBar(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            所在地：{props.address}
-          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

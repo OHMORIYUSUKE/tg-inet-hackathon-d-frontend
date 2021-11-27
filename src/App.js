@@ -12,7 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Top} />
         <Route exact path="/space/entry" component={SpaceEntry} />
-        <Route exact path="/space/:name" render={() => <View />} />
+        <Route exact path="/space/:id" render={() => <View />} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
