@@ -17,7 +17,26 @@ import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, useParams } from "react-router-dom";
 
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 function View() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   let history = useHistory();
   let { id } = useParams();
 
@@ -51,8 +70,24 @@ function View() {
     const inputElementEventName = document.getElementById("textareaEventName");
     const inputValueEventName = inputElementEventName.value;
 
+    const inputElementDescription = document.getElementById(
+      "textareaDescription"
+    );
+    const inputValueDescription = inputElementDescription.value;
+
+    const inputElementEvent_url = document.getElementById("textareaEvent_url");
+    const inputValueEvent_url = inputElementEvent_url.value;
+
     if (inputValueEventName === "") {
       window.alert("イベント名が入力されていません");
+      return;
+    }
+    if (inputValueDescription === "") {
+      window.alert("イベントの詳細が入力されていません。");
+      return;
+    }
+    if (inputValueEvent_url === "") {
+      window.alert("イベントの詳細ページのURLが入力されていません。");
       return;
     }
 
@@ -93,6 +128,8 @@ function View() {
             " " +
             "00:00:00",
           purpose: inputValueEventName,
+          description: inputValueDescription,
+          event_url: inputValueEvent_url,
         },
         {
           headers: {
@@ -149,9 +186,40 @@ function View() {
             </Typography>
             <div>
               {post2.map((data) => (
-                <Paper variant="outlined" square style={{ padding: "10px" }}>
-                  {data.begin_date} ～ {data.end_date} {data.purpose}開催
-                </Paper>
+                <>
+                  <Paper
+                    onClick={handleOpen}
+                    variant="outlined"
+                    square
+                    style={{
+                      padding: "10px",
+                      cursor: "hand",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {data.begin_date} ～ {data.end_date} {data.purpose}を開催
+                  </Paper>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                      >
+                        {data.purpose}
+                      </Typography>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        {data.description}
+                      </Typography>
+                      <a href={data.event_url}>イベント詳細ページ</a>
+                    </Box>
+                  </Modal>
+                </>
               ))}
             </div>
             <div style={{ padding: "0 10em", marginTop: "20px" }}>
@@ -160,6 +228,18 @@ function View() {
                 <TextField
                   label="開催するイベント名"
                   id="textareaEventName"
+                  style={{ width: "50%", margin: "10px" }}
+                />
+                <br />
+                <TextField
+                  label="開催するイベントの詳細"
+                  id="textareaDescription"
+                  style={{ width: "50%", margin: "10px" }}
+                />
+                <br />
+                <TextField
+                  label="開催するイベントの詳細ページURL"
+                  id="textareaEvent_url"
                   style={{ width: "50%", margin: "10px" }}
                 />
                 <br />
