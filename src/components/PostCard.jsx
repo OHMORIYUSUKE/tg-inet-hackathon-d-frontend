@@ -12,8 +12,8 @@ export default function ButtonAppBar(props) {
         <CardMedia
           component="img"
           height="210"
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
+          image={props.image_url}
+          alt={props.image_url}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -22,7 +22,7 @@ export default function ButtonAppBar(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" href={"/space/" + props.id}>
           詳細 →
         </Button>
       </CardActions>

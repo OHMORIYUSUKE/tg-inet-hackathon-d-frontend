@@ -13,7 +13,9 @@ export default function ButtonAppBar(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {props.pageName}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" href="/space/entry">
+            レンタルスペースを登録
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

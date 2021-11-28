@@ -7,13 +7,110 @@ import BusinessIcon from "@mui/icons-material/Business";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-import * as React from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import StaticDatePicker from "@mui/lab/StaticDatePicker";
 
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
+
 function View() {
-  const [value, setValue] = React.useState(null);
+  let history = useHistory();
+  let { id } = useParams();
+
+  const [start, setStart] = React.useState(new Date());
+  console.log(start);
+
+  const [end, setEnd] = React.useState(new Date());
+  console.log(end);
+
+  const [post, setPost] = useState([]);
+  const [post2, setPost2] = useState([]);
+  console.log(post2);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/place/${id}`);
+        setPost(res.data);
+
+        const res2 = await axios.get(`http://localhost:5000/lend/${id}`);
+        setPost2(res2.data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [id]);
+
+  console.log(post);
+  console.log(id);
+
+  function submit() {
+    const inputElementEventName = document.getElementById("textareaEventName");
+    const inputValueEventName = inputElementEventName.value;
+
+    if (inputValueEventName === "") {
+      window.alert("イベント名が入力されていません");
+      return;
+    }
+
+    console.log(inputValueEventName);
+    console.log(start);
+    console.log(end);
+
+    window.alert(
+      inputValueEventName +
+        "\n" +
+        start.getFullYear() +
+        (start.getMonth() + 1) +
+        start.getDate() +
+        "\n" +
+        end.getFullYear() +
+        (end.getMonth() + 1) +
+        end.getDate()
+    );
+    axios
+      .post(
+        "http://localhost:5000/reserve",
+        {
+          place_id: id,
+          begin_date:
+            start.getFullYear() +
+            "-" +
+            (start.getMonth() + 1) +
+            "-" +
+            start.getDate() +
+            " " +
+            "00:00:00",
+          end_date:
+            end.getFullYear() +
+            "-" +
+            (end.getMonth() + 1) +
+            "-" +
+            end.getDate() +
+            " " +
+            "00:00:00",
+          purpose: inputValueEventName,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        window.alert("投稿が完了しました。");
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log("Error : " + JSON.stringify(error.response));
+        window.alert("投稿に失敗しました。");
+      });
+  }
+
   return (
     <>
       <Header pageName="詳細情報" />
@@ -27,8 +124,8 @@ function View() {
             <CardMedia
               component="img"
               height="310"
-              image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-              alt="green iguana"
+              image={post.image_url}
+              alt={post.image_url}
             />
             <Typography
               component="h4"
@@ -37,7 +134,7 @@ function View() {
               align="center"
               style={{ marginTop: "20px" }}
             >
-              レンタルスペースの名前
+              {post.title}
             </Typography>
             <Typography
               variant="subtitle1"
@@ -48,12 +145,12 @@ function View() {
               <BusinessIcon
                 style={{ display: "inline-flex", verticalAlign: "middle" }}
               />
-              所在地：東京都港区浜松町２－３－１
+              所在地：{post.address}
             </Typography>
             <div>
-              {Array.from(Array(5)).map((_, index) => (
-                <Paper variant="outlined" square>
-                  hoge fuga さん 2021/11/27に xxxxxxxxを開催
+              {post2.map((data) => (
+                <Paper variant="outlined" square style={{ padding: "10px" }}>
+                  {data.begin_date} ～ {data.end_date} {data.purpose}開催
                 </Paper>
               ))}
             </div>
@@ -62,18 +159,33 @@ function View() {
                 <h3>予約入力</h3>
                 <TextField
                   label="開催するイベント名"
-                  id="outlined-size-normal"
+                  id="textareaEventName"
                   style={{ width: "50%", margin: "10px" }}
                 />
                 <br />
                 <Paper variant="outlined">
+                  <h4>開始日</h4>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <StaticDatePicker
                       orientation="landscape"
                       openTo="day"
-                      value={value}
+                      value={start}
                       onChange={(newValue) => {
-                        setValue(newValue);
+                        setStart(newValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </Paper>
+                <Paper variant="outlined">
+                  <h4>終了日</h4>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <StaticDatePicker
+                      orientation="landscape"
+                      openTo="day"
+                      value={end}
+                      onChange={(newValue) => {
+                        setEnd(newValue);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -82,7 +194,7 @@ function View() {
               </Paper>
             </div>
             <div style={{ marginTop: "10px", marginBottom: "30px" }}>
-              <Button variant="contained" size="large">
+              <Button variant="contained" size="large" onClick={submit}>
                 予約
               </Button>
             </div>
