@@ -10,7 +10,7 @@ function Footer() {
         <Container maxWidth="md">
           <Toolbar>
             <Typography variant="body1" color="inherit">
-              © 2021 ○○プロジェクト
+              © 2021 Feel Free
             </Typography>
           </Toolbar>
         </Container>
