@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Feel Free
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[東京ガスｉネット Hackathon2021](http://tginet-recruit.jp/internship/hackathon.html)で開発したプロダクトです。
 
-## Available Scripts
+## 開発したプロダクト
 
-In the project directory, you can run:
+空き家、レンタルスペースを探しやすくするサービスを企画、開発しました。似たサービスが、レンタルスペースと空き家のそれぞれに、すでにありました。私たちが開発するプロダクトでは、スペースごとに、使用実績と予約状況を、用途と使用団体を併せて表示し、コミュニティやサークル、団体の活性化、用途から場所を探しやすくしました。また、レンタルスペース所有者から、用途が原因で貸し出しを断られるというリスクの軽減を目指しました。
 
-### `yarn start`
+## 画面
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![](https://storage.googleapis.com/zenn-user-upload/2a7fe791fd71-20211201.png)
+_トップページ_
+![](https://storage.googleapis.com/zenn-user-upload/e1e077e80231-20211201.png)
+_詳細ページ_
+![](https://storage.googleapis.com/zenn-user-upload/c4ee52207229-20211201.png)
+_詳細ページ(予約フォーム)_
+![](https://storage.googleapis.com/zenn-user-upload/0e17648fc453-20211201.png)
+_イベント詳細ポップアップ_
+![](https://storage.googleapis.com/zenn-user-upload/dcea5c2b3920-20211201.png)
+_場所を登録画面_
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 使用技術
 
-### `yarn test`
+### フロントエンド
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- JavaScript
+- React
+- material-ui
 
-### `yarn build`
+### バックエンド
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Python
+- Flask
+- SQLite
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ソースコード
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+バックエンドレポジトリ  
+https://github.com/AO2324-00/feel_free/tree/develop
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+フロントエンドレポジトリ  
+https://github.com/OHMORIYUSUKE/tg-inet-hackathon-d-frontend
